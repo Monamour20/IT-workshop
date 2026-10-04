@@ -1,0 +1,589 @@
+CSL704 - IT Workshop Lab
+MATLAB Codes - Experiments 1 to 12
+Index
+Experiment 1: Introduction to MATLAB Software Interface
+Experiment 2: Working with MATLAB Variables and Miscellaneous Commands
+Experiment 3: Mathematical Operations on Matrices
+Experiment 4: Built-in Functions and Solving Linear Equations
+Experiment 5: Plotting Data using MATLAB
+Experiment 6: Working with MATLAB M-Files
+Experiment 7: Debugging M-Files in MATLAB
+Experiment 8: Control Flow and Operators in MATLAB
+Experiment 9: Image Acquisition and Pre-processing using MATLAB
+Experiment 10: Deep Learning Vision Algorithms (CNNs)
+Experiment 11: VLAB 1: Image Histogram
+Experiment 12: VLAB 2: Fourier Transform
+Experiment 1: Introduction to MATLAB Software Interface
+clc;
+clear;
+ 
+a = 10;  x = 10;  y = 20;
+z = exp(-a) * sin(x) + 10 * sqrt(y);
+ 
+disp('Value of z =');
+disp(z);
+Extra (manual example): multiple statements per line
+a = 7; b = cos(a), c = cosh(a)
+Experiment 2: Working with MATLAB Variables and Miscellaneous Commands
+Task 1: Creating and overwriting variables
+clc; clear;
+a = 10;  b = 20;
+disp('Initial value of a');  disp(a);
+disp('Initial value of b');  disp(b);
+a = 15;
+disp('New value of a');      disp(a);
+Task 2: Error message and correction
+a = 15;  b = 20;
+c = a +
+c = a + b;
+disp('Value of c');  disp(c);
+Task 3: Operator precedence
+x = 2 + 3 * 4;
+y = (2 + 3) * 4;
+disp('Value of x'); disp(x);
+disp('Value of y'); disp(y);
+Task 4: Controlling floating-point display
+piVal = pi;
+format short;  disp('Format Short'); disp(piVal);
+format long;   disp('Format Long');  disp(piVal);
+format bank;   disp('Format Bank');  disp(piVal);
+Task 5: Workspace management
+clc; clear;
+p = 100;  q = 200;
+disp('Output of who');   who
+disp('Output of whos');  whos
+clear p;
+disp('After clear p');   who
+clear all;
+Task 6: Keeping track of the session
+a = 10
+b = 20
+c = a + b
+sqrt(25)
+Task 7: Multiple statements per line
+a = 5; b = 10; c = a + b;
+disp('Value of a'); disp(a);
+disp('Value of b'); disp(b);
+disp('Value of c'); disp(c);
+Experiment 3: Mathematical Operations on Matrices
+Exercise 1: Multiplication of M and N
+M = [1 3 -1 6; 2 4 0 -1; 0 -2 3 -1; -1 2 -5 1];
+N = [-1 -3 3; 2 1 6; 1 4 -1; 2 -1 2];
+P = M * N;
+disp('Multiplication M * N'); disp(P);
+Exercise 2: Addition of M (1x4) and N
+M = [1 -2 8 0];
+N = [1 5 6 8; 2 5 6 9];
+R = M + N;
+disp(R);
+Exercise 3: Transpose of a null matrix
+A = zeros(3,3);
+T = A';
+disp('Null Matrix'); disp(A);
+disp('Transpose of Null Matrix'); disp(T);
+Exercise 4: [(A+B)+C] transpose
+A = [1 6 9 8 5; 9 3 5 8 4; 5 6 3 5 7];
+B = [6 5 9 3 5; 6 5 4 8 5; 6 3 5 7 9];
+C = [2 5 9 3 4; 5 6 3 7 8; 9 8 6 5 4];
+R = ((A + B) + C)';
+disp('[(A+B)+C] Transpose'); disp(R);
+Exercises 5 and 6: Null and unity matrices
+A = zeros(4,4);  B = eye(4);   C = A + B;
+disp('Addition of Null Matrix and Unity Matrix'); disp(C);
+ 
+A = zeros(3,3);  B = eye(3);   C = A * B;
+disp('Multiplication of Null Matrix and Unity Matrix'); disp(C);
+Experiment 4: Built-in Functions and Solving Linear Equations
+Exercise 1: Scalar, vector and matrix functions
+A = [1 2 3; 4 5 6; 7 8 9];   v = [2 4 6 8];
+ 
+disp('Scalar Functions');
+disp(sin(pi/2));  disp(cos(0));  disp(tan(pi/4));  disp(exp(1));  disp(log(exp(1)));
+disp(abs(-10));   disp(sqrt(25)); disp(rem(17,5));
+disp(round(3.6)); disp(floor(3.8)); disp(ceil(3.2));
+ 
+disp('Vector Functions');
+disp(max(v)); disp(min(v)); disp(length(v)); disp(sort(v)); disp(sum(v));
+disp(prod(v)); disp(median(v)); disp(mean(v)); disp(std(v));
+ 
+disp('Matrix Functions');
+disp(eye(3)); disp(zeros(3)); disp(ones(3)); disp(diag(A));
+disp(triu(A)); disp(tril(A)); disp(rand(3));
+disp(size(A)); disp(det(A)); disp(rank(A)); disp(rref(A)); disp(eig(A)); disp(poly(A));
+Exercise 2 (Part 1): Solving the system of equations
+A = [4 -2 6; 2 8 2; 6 10 3];
+B = [8; 4; 0];
+X = A \ B;
+disp('Solution of the equations');
+disp('x ='); disp(X(1));
+disp('y ='); disp(X(2));
+disp('z ='); disp(X(3));
+Exercise 2 (Part 2): Dot product in three ways
+u = [-3 8 -2];   v = [6.5 -5 -4];
+dot1 = sum(u .* v);
+dot2 = u * v';
+dot3 = dot(u, v);
+disp('(a) Dot Product using sum');                    disp(dot1);
+disp('(b) Dot Product using matrix multiplication');  disp(dot2);
+disp('(c) Dot Product using dot function');           disp(dot3);
+Experiment 5: Plotting Data using MATLAB
+Exercise 1: y = 3x^3 - 26x + 10 and its derivatives
+x   = -2:0.1:4;
+y   = 3*x.^3 - 26*x + 10;
+dy  = 9*x.^2 - 26;
+d2y = 18*x;
+ 
+plot(x, y,  'b', 'LineWidth', 2);  hold on;
+plot(x, dy, 'r', 'LineWidth', 2);
+plot(x, d2y,'g', 'LineWidth', 2);
+ 
+title('Function and its Derivatives');  xlabel('x');  ylabel('y');
+legend('y = 3x^3 - 26x + 10', 'First Derivative', 'Second Derivative');
+grid on;
+Exercise 2: f(x) = (x+5)^2 / (4 + 3x^2), -3 <= x <= 5
+x = -3:0.1:5;
+y = ((x + 5).^2) ./ (4 + 3*x.^2);
+plot(x, y, 'b', 'LineWidth', 2);
+title('Plot of f(x)');  xlabel('x');  ylabel('f(x)');  grid on;
+Exercise 3: Wheatstone bridge, vAB = v (R2/(R1+R2) - R4/(R3+R4))
+v = 12;  R3 = 250;  R4 = 250;
+ 
+R2 = 120;  R1 = 0:1:500;
+vAB1 = v * ((R2 ./ (R1 + R2)) - (R4 / (R3 + R4)));
+subplot(2,1,1);  plot(R1, vAB1, 'b', 'LineWidth', 2);
+title('v_{AB} versus R_1');  xlabel('R_1 (\Omega)');  ylabel('v_{AB} (V)');  grid on;
+ 
+R1 = 120;  R2 = 0:1:500;
+vAB2 = v * ((R2 ./ (R1 + R2)) - (R4 / (R3 + R4)));
+subplot(2,1,2);  plot(R2, vAB2, 'r', 'LineWidth', 2);
+title('v_{AB} versus R_2');  xlabel('R_2 (\Omega)');  ylabel('v_{AB} (V)');  grid on;
+Exercise 4: Formatted cosine plot
+x = 0:1:100;
+y = cos(x);
+plot(x, y, '--rs', 'LineWidth', 1.5, 'MarkerSize', 5, ...
+     'MarkerEdgeColor', 'm', 'MarkerFaceColor', 'c');
+title('Cosine Signal');
+xlabel('Time (s)');
+ylabel('Amplitude (mV)');
+set(gca, 'Color', 'y');
+grid on;
+Exercise 5: Nine-tone audio waveform and spectrogram
+Fs = 8000;
+duration = 0.5;
+freq = [659 622 659 622 659 494 587 523 440];
+signal = [];
+for i = 1:length(freq)
+    t = 0:1/Fs:duration;
+    tone = sin(2*pi*freq(i)*t);
+    signal = [signal tone];
+end
+ 
+modifiedSignal = signal;
+modifiedSignal(2:2:end) = -modifiedSignal(2:2:end);
+finalSignal = [signal modifiedSignal];
+ 
+sound(finalSignal, Fs);
+audiowrite('NineTone.wav', finalSignal, Fs);
+figure;
+spectrogram(finalSignal, 256, 200, 256, Fs, 'yaxis');
+title('Spectrogram of Nine Tone Signal');
+xlabel('Time (s)');  ylabel('Frequency (kHz)');
+Experiment 6: Working with MATLAB M-Files
+Exercise 1: Signum function
+t = -10:0.1:10;
+y = sign(t);
+plot(t, y, 'b', 'LineWidth', 2);
+title('Signum Function');  xlabel('Time');  ylabel('Amplitude');  grid on;
+Exercises 2 and 3: Exponential growing and decaying signals
+t = 0:0.1:5;
+y = exp(t);
+plot(t, y, 'r', 'LineWidth', 2);
+title('Exponential Growing Signal');  xlabel('Time');  ylabel('Amplitude');  grid on;
+ 
+y = exp(-t);
+figure;
+plot(t, y, 'b', 'LineWidth', 2);
+title('Exponential Decaying Signal');  xlabel('Time');  ylabel('Amplitude');  grid on;
+Exercise 4: Subtract and multiply two sinusoidal signals
+t  = 0:0.01:2*pi;
+x1 = sin(t);
+x2 = sin(2*t);
+ 
+subplot(2,1,1);  plot(t, x1 - x2, 'b', 'LineWidth', 2);
+title('Subtraction of Two Sinusoidal Signals');
+xlabel('Time');
+ylabel('Amplitude');
+grid on;
+ 
+subplot(2,1,2);  plot(t, x1 .* x2, 'r', 'LineWidth', 2);
+title('Multiplication of Two Sinusoidal Signals');
+xlabel('Time');
+ylabel('Amplitude');
+grid on;
+Exercise 5: User-defined function FtoC and thermal expansion problem
+% ---- file FtoC.m (function M-file) ----
+function C = FtoC(F)
+    C = (F - 32) * 5 / 9;
+end
+% ---- script exp6_ex5.m (calls the function) ----
+alpha = 23e-6;
+L = 4.5;   W = 2.25;
+C1 = FtoC(40);   C2 = FtoC(92);
+deltaT = C2 - C1;
+ 
+deltaL = alpha * L * deltaT;
+deltaW = alpha * W * deltaT;
+deltaArea = (L + deltaL) * (W + deltaW) - (L * W);
+ 
+disp('Temperature change (C)');  disp(deltaT);
+disp('Change in Area (m^2)');     disp(deltaArea);
+Experiment 7: Debugging M-Files in MATLAB
+Q1
+clc; clear;
+total = 0;
+for i = 1:10
+    total = total + i;
+end
+disp(['Sum = ', num2str(total)]);
+Q2
+clc; clear;
+len = 5;
+width = 4;
+area = len * width;
+disp(['Area = ', num2str(area)]);
+Q3
+clc; clear;
+x = [10 20 30 40];
+avg = sum(x) / length(x);
+disp(['Average = ', num2str(avg)]);
+Q4
+clc; clear;
+a = 10; b = 2;
+c = a / b;
+disp(['Result = ', num2str(c)]);
+Q5
+clc; clear;
+n = 5;
+f = factorial(n);
+disp(['Factorial = ', num2str(f)]);
+Q6
+clc; clear;
+A = [3 5 7 9];
+val = A(4);
+disp(['Value = ', num2str(val)]);
+Q7
+clc; clear;
+i = 1;
+while i <= 5
+    disp(i);
+    i = i + 1;
+end
+Q8
+clc; clear;
+C = 25;
+F = (9/5) * C + 32;
+disp(['Fahrenheit = ', num2str(F)]);
+Q9
+% ---- file squareValue.m ----
+function y = squareValue(x)
+    y = x * x;
+end
+ 
+% ---- script ----
+clc; clear;
+result = squareValue(5);
+disp(['Square = ', num2str(result)]);
+Q10
+% ---- file rectangleCalc.m ----
+function [area, peri] = rectangleCalc(l, w)
+    area = l * w;
+    peri = 2 * (l + w);
+end
+ 
+% ---- script ----
+clc; clear;
+[area, peri] = rectangleCalc(5, 4);
+disp(['Area = ', num2str(area)]);
+disp(['Perimeter = ', num2str(peri)]);
+Q11
+clc; clear;
+n = 10;
+s = 0;
+for i = 1:n
+    s = s + i;
+end
+disp(['Sum = ', num2str(s)]);
+Q12
+clc; clear;
+a = 1; b = 5; c = 6;
+root1 = (-b + sqrt(b^2 - 4*a*c)) / (2*a);
+root2 = (-b - sqrt(b^2 - 4*a*c)) / (2*a);
+disp('Roots of the quadratic equation');
+disp([root1 root2]);
+Q13
+clc; clear;
+M = magic(4);
+val = M(4, 2);
+disp(['Value = ', num2str(val)]);
+Q14
+% ---- file myAverage.m ----
+function avg = myAverage(x)
+    n = length(x);
+    total = 0;
+    for i = 1:n
+        total = total + x(i);
+    end
+    avg = total / n;
+end
+ 
+% ---- script ----
+clc; clear;
+x = [10 20 30 40];
+avg = myAverage(x);
+disp(['Average = ', num2str(avg)]);
+Q15
+% ---- file fib.m ----
+function f = fib(n)
+    if n == 1 || n == 2
+        f = 1;
+    else
+        f = fib(n-1) + fib(n-2);
+    end
+end
+ 
+% ---- script ----
+clc; clear;
+n = 6;
+result = fib(n);
+disp(['Fibonacci Number = ', num2str(result)]);
+Q16
+clc; clear;
+age = 21;
+name = 'Alice';
+disp(['Name: ' name ' Age: ' num2str(age)]);
+Q17
+clc; clear;
+k = 0; s = 0;
+while s < 50
+    k = k + 1;
+    s = s + k;
+end
+disp(['k = ', num2str(k)]);
+disp(['Sum = ', num2str(s)]);
+Q18
+clc; clear;
+for i = 1:5
+    for j = 1:5
+        T(i,j) = i * j;
+    end
+end
+disp('Multiplication Table');
+disp(T);
+Experiment 8: Control Flow and Operators in MATLAB
+Exercise 2: April temperatures
+temp = [58 73 73 53 50 48 56 73 73 66 69 63 74 82 84 ...
+        91 93 89 91 80 59 69 56 64 63 66 64 74 63 69];
+ 
+a = sum(temp > 75);
+b = sum(temp >= 65 & temp <= 80);
+c = find(temp >= 50 & temp <= 60);
+ 
+disp('Number of days above 75 F');             disp(a);
+disp('Number of days between 65 F and 80 F');  disp(b);
+disp('Days when temperature was between 50 F and 60 F');  disp(c);
+Exercise 3: Worker's pay with overtime
+hours = input('Enter number of hours worked: ');
+wage  = input('Enter hourly wage: ');
+ 
+if hours <= 40
+    pay = hours * wage;
+else
+    overtime = hours - 40;
+    pay = (40 * wage) + (overtime * wage * 1.5);
+end
+disp(['Total Pay = ', num2str(pay)]);
+Exercise 4: Matrix built with nested loops
+n = input('Enter number of rows: ');
+m = input('Enter number of columns: ');
+A = zeros(n, m);
+ 
+for j = 1:m,  A(1,j) = j;  end
+for i = 1:n,  A(i,1) = i;  end
+for i = 2:n
+    for j = 2:m
+        A(i,j) = A(i-1,j) + A(i,j-1);
+    end
+end
+disp('Generated Matrix'); disp(A);
+Exercise 5: Retirement savings
+balance = 300000;  interest = 0.05;  withdraw = 25000;  inflation = 0.02;
+year = 0;  withdrawal = [];  balanceHistory = [];
+ 
+while balance > 0
+    year = year + 1;
+    balance = balance * (1 + interest);
+    balance = balance - withdraw;
+    withdrawal(year) = withdraw;
+    balanceHistory(year) = max(balance, 0);
+    withdraw = withdraw * (1 + inflation);
+end
+disp(['Money lasts for ', num2str(year), ' years']);
+ 
+subplot(2,1,1); plot(1:year, withdrawal, 'b', 'LineWidth', 2);
+title('Yearly Withdrawals'); xlabel('Year'); ylabel('Withdrawal'); grid on;
+subplot(2,1,2); plot(1:year, balanceHistory, 'r', 'LineWidth', 2);
+title('Account Balance'); xlabel('Year'); ylabel('Balance'); grid on;
+Exercise 6: (row + column) / column^2
+n = input('Enter rows: ');  m = input('Enter columns: ');
+A = zeros(n, m);
+for i = 1:n
+    for j = 1:m
+        A(i,j) = (i + j) / (j^2);
+    end
+end
+disp(A);
+Exercise 7: Smallest odd integer divisible by 11 whose square root is greater than 132
+n = 1;
+while true
+    if mod(n,2) == 1 && mod(n,11) == 0 && sqrt(n) > 132
+        break
+    end
+    n = n + 1;
+end
+disp('The required number is:');
+disp(n);
+Exercise 8: Sort without sort()
+x = [-3.5 5 -6.2 11.1 0 7 -9.5 2 15 -1 3 2.5];
+n = length(x);
+for i = 1:n-1
+    for j = 1:n-i
+        if x(j) > x(j+1)
+            temp = x(j);  x(j) = x(j+1);  x(j+1) = temp;
+        end
+    end
+end
+disp('Sorted Vector');  disp(x);
+Exercise 9: Average of the top 8 scores
+marks = [73 91 37 81 63 66 50 90 75 43 88 80 79 69 26 82 89 99 71 59];
+marks = sort(marks, 'descend');
+top8 = marks(1:8);
+average = mean(top8);
+disp('Top 8 Scores');  disp(top8);
+disp('Average of Top 8 Scores');  disp(average);
+Exercise 10: Circle through three points
+x = [13 4 19];  y = [15 18 3];
+A = [2*(x(2)-x(1))  2*(y(2)-y(1));
+     2*(x(3)-x(1))  2*(y(3)-y(1))];
+B = [x(2)^2 + y(2)^2 - x(1)^2 - y(1)^2;
+     x(3)^2 + y(3)^2 - x(1)^2 - y(1)^2];
+sol = A \ B;   h = sol(1);   k = sol(2);
+r = sqrt((x(1)-h)^2 + (y(1)-k)^2);
+ 
+theta = linspace(0, 2*pi, 100);
+plot(h + r*cos(theta), k + r*sin(theta), 'b', 'LineWidth', 2);  hold on;
+plot(x, y, 'r*', 'MarkerSize', 10);
+axis equal;  grid on;
+title('Circle Passing Through Three Points');  xlabel('X');  ylabel('Y');
+disp('Center');  disp([h k]);
+disp('Radius');  disp(r);
+Exercise 11: n such that 1+2+...+n has three identical digits
+total = 0;  n = 0;
+while true
+    n = n + 1;
+    total = total + n;
+    if total >= 100 && total <= 999
+        a = floor(total/100);
+        b = floor(mod(total,100)/10);
+        c = mod(total,10);
+        if a == b && b == c
+            break
+        end
+    end
+end
+disp('Value of n');  disp(n);
+disp('Required Sum');  disp(total);
+Exercise 12: Twin primes between 10 and 500
+result = [];
+for i = 11:498
+    if isprime(i) && isprime(i+2)
+        result = [result; i i+2];
+    end
+end
+disp('Twin Prime Numbers');  disp(result);
+Experiment 9: Image Acquisition and Pre-processing using MATLAB
+Exercise 1 (a): Read, show, grayscale and HSV
+clc; clear; close all;
+img = imread('flower.png');
+ 
+figure;
+subplot(1,3,1);  imshow(img);   title('Original Image');
+gray = rgb2gray(img);
+subplot(1,3,2);  imshow(gray);  title('Grayscale Image');
+hsvImg = rgb2hsv(img);
+subplot(1,3,3);  imshow(hsvImg); title('HSV Image');
+Exercise 1 (b): Resize to half and crop a region of interest
+img = imread('flower.png');
+resizeImg = imresize(img, 0.5);
+cropImg   = imcrop(img);
+ 
+figure;
+subplot(1,2,1);  imshow(resizeImg);  title('Resized Image');
+subplot(1,2,2);  imshow(cropImg);    title('Cropped Image');
+Exercise 1 (c) and 2 (4): Grayscale and normalisation with mat2gray
+img = imread('flower.png');
+gray = rgb2gray(img);
+normImg = mat2gray(gray);
+ 
+figure;
+subplot(1,2,1);  imshow(gray);     title('Grayscale Image');
+subplot(1,2,2);  imshow(normImg);  title('Normalized Image');
+ 
+disp(min(normImg(:)));  disp(max(normImg(:)));
+Exercise 2 (2): Resize to double the size
+img = imread('flower.png');
+resizeImg = imresize(img, 2);
+subplot(1,2,1);  imshow(img);        title('Original Image');
+subplot(1,2,2);  imshow(resizeImg);  title('Resized Image (2x)');
+Experiment 10: Deep Learning Vision Algorithms (CNNs)
+CNN for image classification
+clc; clear; close all;
+ 
+[images, digits, angles] = digitTrain4DArrayData;
+disp('Dataset Loaded Successfully');
+ 
+net = alexnet;
+disp('AlexNet Loaded Successfully');
+ 
+analyzeNetwork(net);
+CNN for image segmentation
+imageSize  = [224 224 3];
+numClasses = 2;
+net = unet(imageSize, numClasses);
+analyzeNetwork(net);
+CNN for object detection
+disp('CNN for Object Detection');
+which yolov2ObjectDetector
+net = alexnet;
+disp('Pretrained AlexNet Loaded Successfully');
+analyzeNetwork(net);
+disp('YOLOv2 Object Detection Toolbox is Available');
+disp('Training images and bounding box labels are required to train a detector.');
+disp('Object detection can be performed after training the network.');
+Experiment 11: VLAB 1: Image Histogram
+img  = imread('flower.png');
+gray = rgb2gray(img);
+eq   = histeq(gray);
+ 
+subplot(2,2,1);  imshow(gray);  title('Original gray');
+subplot(2,2,2);  imhist(gray);  title('Histogram of original');
+subplot(2,2,3);  imshow(eq);    title('Equalized image');
+subplot(2,2,4);  imhist(eq);    title('Histogram of equalized');
+Experiment 12: VLAB 2: Fourier Transform
+Fs = 1000;  t = 0:1/Fs:1-1/Fs;  N = length(t);
+x  = sin(2*pi*50*t) + 0.5*sin(2*pi*120*t);
+X  = fft(x);
+f  = (0:N-1) * Fs / N;
+plot(f(1:N/2), abs(X(1:N/2)) * 2 / N);
+xlabel('Frequency (Hz)');  ylabel('Amplitude');  title('Fourier Transform');
+CSL704 MATLAB Codes - Page 1
+
